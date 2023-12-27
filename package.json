@@ -5,9 +5,9 @@
     "node": ">=18"
   },
   "scripts": {
-    "all:init": "pnpm i -r && pnpm --stream -r run init",
-    "all:start:dev": "pnpm --stream -r run start:dev",
-    "all:clean": "pnpm --stream -r run clean"
+    "all:init": "pnpm i -r && pnpm --parallel run init",
+    "all:start:dev": "pnpm --parallel run start:dev",
+    "all:clean": "pnpm --parallel run clean"
   },
   "author": "Dzianis Buyakou <dzianis.buyakou@gmail.com>",
   "license": "MIT",

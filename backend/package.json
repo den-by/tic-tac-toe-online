@@ -9,7 +9,7 @@
     "infrastructure:up": "docker-compose -f docker-compose.yml up -d && wait-on -d 10000 tcp:3306 ",
     "infrastructure:down": "docker-compose -f docker-compose.yml down --volumes --rmi all --remove-orphans",
     "start:prod": "node dist/main",
-    "start:dev": "nest start --watch",
+    "start:dev": "nest start --watch --preserveWatchOutput",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
     "test": "jest",
