@@ -1,0 +1,18 @@
+{
+  "name": "tic-tac-toe",
+  "version": "1.0.0",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "all:init": "pnpm --stream -r run init",
+    "all:start:dev": "pnpm --stream -r run start:dev",
+    "all:infrastructure:down": "pnpm --stream -r run infrastructure:down"
+  },
+  "author": "Dzianis Buyakou <dzianis.buyakou@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+  },
+  "devDependencies": {
+  }
+}
