@@ -3,8 +3,11 @@
   "name": "backend",
   "version": "1.0.0",
   "scripts": {
-    "init": "npm run prisma:generate",
+    "init": "npm run infrastructure:up  &&  npm run prisma:generate && npm run prisma:push",
+    "clean": "npm run infrastructure:down && rimraf -- dist coverage",
     "build": "nest build",
+    "infrastructure:up": "docker-compose -f docker-compose.yml up -d",
+    "infrastructure:down": "docker-compose -f docker-compose.yml down",
     "start:prod": "node dist/main",
     "start:dev": "npm run nest start --watch",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",

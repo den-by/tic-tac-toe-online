@@ -7,7 +7,7 @@
   "scripts": {
     "all:init": "pnpm --stream -r run init",
     "all:start:dev": "pnpm --stream -r run start:dev",
-    "all:infrastructure:down": "pnpm --stream -r run infrastructure:down"
+    "all:clean": "pnpm --stream -r run clean"
   },
   "author": "Dzianis Buyakou <dzianis.buyakou@gmail.com>",
   "license": "MIT",
