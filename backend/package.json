@@ -3,7 +3,7 @@
   "name": "backend",
   "version": "1.0.0",
   "scripts": {
-    "init": "prisma init",
+    "init": "npm run prisma:generate",
     "build": "nest build",
     "start:prod": "node dist/main",
     "start:dev": "npm run nest start --watch",
