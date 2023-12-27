@@ -52,7 +52,7 @@ npm install -g pnpm
 
    ```bash
    cd backend
-   cp env.template .env
+   cp .env.example .env
    ```
 
 5. **Set Up the Frontend Environment**:
@@ -61,7 +61,7 @@ npm install -g pnpm
 
    ```bash
    cd frontend
-   cp env.template .env
+   cp .env.example .env
    ```
 
 6. **Start the Project**:
