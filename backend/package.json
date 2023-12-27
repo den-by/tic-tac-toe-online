@@ -6,7 +6,7 @@
     "init": "npm run infrastructure:up  &&  npm run prisma:generate && npm run prisma:push",
     "clean": "npm run infrastructure:down && rimraf -- dist coverage",
     "build": "nest build",
-    "infrastructure:up": "docker-compose -f docker-compose.yml up -d",
+    "infrastructure:up": "docker-compose -f docker-compose.yml up -d && wait-on -d 10000 tcp:3306 ",
     "infrastructure:down": "docker-compose -f docker-compose.yml down --volumes --rmi all --remove-orphans",
     "start:prod": "node dist/main",
     "start:dev": "nest start --watch",
@@ -67,7 +67,8 @@
     "ts-loader": "^9.4.3",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0",
-    "typescript": "^5.1.3"
+    "typescript": "^5.1.3",
+    "wait-on": "^7.2.0"
   },
   "jest": {
     "moduleFileExtensions": [
