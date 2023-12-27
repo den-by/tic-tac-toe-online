@@ -5,7 +5,7 @@
     "node": ">=18"
   },
   "scripts": {
-    "all:init": "pnpm --stream -r run init",
+    "all:init": "pnpm i -r && pnpm --stream -r run init",
     "all:start:dev": "pnpm --stream -r run start:dev",
     "all:clean": "pnpm --stream -r run clean"
   },
