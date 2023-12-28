@@ -54,7 +54,7 @@ npm install -g pnpm
    cd backend
    cp .env.example .env
    ```
-
+   The backend will use the port http://localhost:3000/api/ for Swagger.
 5. **Set Up the Frontend Environment**:
 
    Navigate to the frontend folder and create a `.env` file from the template:
@@ -63,7 +63,7 @@ npm install -g pnpm
    cd frontend
    cp .env.example .env
    ```
-
+   The frontend will be accessible at http://localhost:5173/.
 6. **Start the Project**:
 
    Return to the project root and start the project using:
