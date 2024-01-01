@@ -1,5 +1,6 @@
 import {
   BadRequestException,
+  ConflictException,
   Injectable,
   InternalServerErrorException,
   Logger,
@@ -9,6 +10,7 @@ import { AuthResponse } from "./types/auth.response";
 import * as bcrypt from "bcrypt";
 import { LoginDto } from "./dto/login.dto";
 import { CreateUserDto } from "src/users/dto/create-user.dto";
+import * as _ from "lodash";
 
 import { JwtService } from "@nestjs/jwt";
 import { User } from "@prisma/client";
@@ -69,23 +71,19 @@ export class AuthService {
       });
 
       return { loginToken: token, userData: user };
-    } catch (error) {
-      // TODO add util for handling unknown errors
-      const errorMessage =
-        typeof error === "object" && error instanceof Error
-          ? error.message
-          : "unknown error";
-      this.logger.error(errorMessage);
-      throw new InternalServerErrorException(errorMessage);
+    } catch (e) {
+      this.logger.error(e);
+      if (e instanceof Error && e.message === "User already exists") {
+        throw new ConflictException("Username already exists");
+      } else {
+        throw new InternalServerErrorException("Something went wrong");
+      }
     }
   }
 
-  //TODO: make optional only password
-  async getUserSafely(id: number): Promise<Partial<User>> {
-    const user: Partial<User> = await this.usersService.getUserOrThrow(id);
+  async getUserSafely(id: number): Promise<Omit<User, "password">> {
+    const user: User = await this.usersService.getUserOrThrow(id);
 
-    delete user.password;
-
-    return user;
+    return _.omit(user, ["password"]);
   }
 }
