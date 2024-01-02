@@ -56,7 +56,7 @@ export class Gateway implements OnModuleInit {
         return;
       }
       const token = authorizationHeader.split(" ")[1];
-      const tokenUsername = await this.authService.decodeLoginToken(token);
+      const tokenUsername = await this.authService.getUsernameFromToken(token);
 
       if (!tokenUsername) {
         next(new Error(authenticationErrorMessages.invalidToken));
@@ -76,7 +76,9 @@ export class Gateway implements OnModuleInit {
       try {
         updateUserConnectedStatus(user.username, true);
       } catch {
-        next(new Error(authenticationErrorMessages.failedToUpdateConnectionStatus));
+        next(
+          new Error(authenticationErrorMessages.failedToUpdateConnectionStatus),
+        );
         return;
       }
       socket.data.playerDetails = {
@@ -323,7 +325,9 @@ export class Gateway implements OnModuleInit {
         try {
           updateUserConnectedStatus(username, false);
         } catch {
-          this.logger.error(authenticationErrorMessages.failedToUpdateConnectionStatus);
+          this.logger.error(
+            authenticationErrorMessages.failedToUpdateConnectionStatus,
+          );
         }
 
         this.logger.log(`User ${username} disconnected`);

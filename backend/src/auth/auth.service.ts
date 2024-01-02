@@ -24,22 +24,19 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  private getJwtToken({ id, username }: { id: string; username: string }) {
+  private createJwtToken({ id, username }: { id: string; username: string }) {
     return this.jwtService.sign({ id, username });
   }
 
-  async decodeLoginToken(token: string): Promise<string> {
-    let tokenusername = "";
-
+  async getUsernameFromToken(token: string): Promise<string | null> {
     try {
       const payload = this.jwtService.verify(token);
       const { username } = payload;
-      tokenusername = username;
-    } catch (err) {
-      console.log("Token verification failed:", err);
+      if (typeof username === "string") return username;
+    } catch (e) {
+      this.logger.error(e);
     }
-
-    return tokenusername;
+    return null;
   }
 
   async login(loginDto: LoginDto): Promise<AuthResponse> {
@@ -50,7 +47,7 @@ export class AuthService {
     if (!bcrypt.compareSync(password, user.password))
       throw new BadRequestException("Name or Password are incorrect");
 
-    const token = this.getJwtToken({
+    const token = this.createJwtToken({
       id: user.id.toString(),
       username: user.username,
     });
@@ -65,7 +62,7 @@ export class AuthService {
     try {
       const user = await this.usersService.create(createUserDto);
 
-      const token = this.getJwtToken({
+      const token = this.createJwtToken({
         id: user.id.toString(),
         username: user.username,
       });
