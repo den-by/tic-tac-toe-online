@@ -6,6 +6,7 @@ import { User } from "@prisma/client";
 import { LoginDto } from "./dto/login.dto";
 import { CreateUserDto } from "../users/dto/create-user.dto";
 import { UsersService } from "../users/users.service";
+import { omit } from "lodash";
 
 describe("Auth Service", () => {
   let service: AuthService;
@@ -57,7 +58,7 @@ describe("Auth Service", () => {
     expect(jwtService.sign).toHaveBeenCalled();
     expect(result).toEqual({
       loginToken: "token",
-      userData: mockUser,
+      userData: omit(mockUser, ["password"]),
     });
   });
 
@@ -93,7 +94,7 @@ describe("Auth Service", () => {
     expect(jwtService.sign).toHaveBeenCalled();
     expect(result).toEqual({
       loginToken: "token",
-      userData: mockUser,
+      userData: omit(mockUser, ["password"]),
     });
   });
 
