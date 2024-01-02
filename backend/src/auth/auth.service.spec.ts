@@ -1,6 +1,4 @@
-import {
-  BadRequestException,
-} from "@nestjs/common";
+import { BadRequestException } from "@nestjs/common";
 import { UsersService } from "src/users/users.service";
 import * as bcrypt from "bcrypt";
 import { AuthService } from "./auth.service";
@@ -71,13 +69,11 @@ describe("Auth Service", () => {
       password: "testPwd",
     };
 
-    await expect(service.login(loginDto)).rejects.toThrow(
-      BadRequestException
-    );
+    await expect(service.login(loginDto)).rejects.toThrow(BadRequestException);
   });
 
   it("should register new user and return auth data for him", async () => {
-    const mockUser ={
+    const mockUser = {
       id: 1,
       username: "test",
       password: "testPwdHash",
