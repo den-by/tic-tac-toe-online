@@ -2,6 +2,7 @@ import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { LoginDto } from "./dto/login.dto";
 import { CreateUserDto } from "../users/dto/create-user.dto";
+import { faker } from "@faker-js/faker";
 
 describe("AuthController", () => {
   let controller: AuthController;
@@ -14,8 +15,8 @@ describe("AuthController", () => {
 
   it("should register a user", async () => {
     const createUserDto: CreateUserDto = {
-      username: "test",
-      password: "test",
+      username: faker.internet.userName(),
+      password: faker.internet.password(),
     };
 
     (service.register as jest.Mock).mockResolvedValue("user registered");
@@ -27,7 +28,10 @@ describe("AuthController", () => {
   });
 
   it("should login a user", async () => {
-    const loginDto: LoginDto = { username: "test", password: "test" };
+    const loginDto: LoginDto = {
+      username: faker.internet.userName(),
+      password: faker.internet.password(),
+    };
 
     (service.login as jest.Mock).mockResolvedValue("user logged in");
 
