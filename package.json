@@ -9,6 +9,7 @@
     "all:start:dev": "pnpm --parallel run start:dev",
     "all:clean": "pnpm --parallel run clean",
     "all:lint:all": "pnpm --parallel run lint:all",
+    "all:test": "pnpm --parallel run test",
     "prepare": "husky install"
   },
   "author": "Dzianis Buyakou <dzianis.buyakou@gmail.com>",
