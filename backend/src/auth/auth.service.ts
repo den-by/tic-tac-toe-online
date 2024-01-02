@@ -15,6 +15,7 @@ import { JwtService } from "@nestjs/jwt";
 import { User } from "@prisma/client";
 import { UsersService } from "../users/users.service";
 import { CreateUserDto } from "../users/dto/create-user.dto";
+import { CreateUserResponseDto } from "../users/dto/CreateUserResponseDto";
 
 @Injectable()
 export class AuthService {
@@ -59,7 +60,7 @@ export class AuthService {
     };
   }
 
-  async register(createUserDto: CreateUserDto): Promise<AuthResponse> {
+  async register(createUserDto: CreateUserDto): Promise<CreateUserResponseDto> {
     try {
       const user = await this.usersService.create(createUserDto);
 
@@ -68,7 +69,7 @@ export class AuthService {
         username: user.username,
       });
 
-      return { loginToken: token, userData: _.omit(user, ["password"]) };
+      return { token };
     } catch (e) {
       this.logger.error(e);
       if (e instanceof Error && e.message === "User already exists") {
