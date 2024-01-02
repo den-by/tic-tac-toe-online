@@ -5,7 +5,7 @@ import { v4 as uuidv4 } from "uuid";
 import { GameWinner, OnlineGameProp } from "./types";
 
 import { AuthService } from "../auth/auth.service";
-import { MatchesService } from "src/matches/matches.service";
+import { MatchesService } from "../matches/matches.service";
 import { UsersService } from "../users/users.service";
 import { authenticationErrorMessages } from "./constants";
 

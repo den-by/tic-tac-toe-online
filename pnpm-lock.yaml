@@ -9,7 +9,7 @@ importers:
   .:
     devDependencies:
       husky:
-        specifier: ^8.0.3
+        specifier: ^8.0.0
         version: 8.0.3
 
   backend:
@@ -75,6 +75,9 @@ importers:
         specifier: ^9.0.1
         version: 9.0.1
     devDependencies:
+      '@faker-js/faker':
+        specifier: ^8.3.1
+        version: 8.3.1
       '@nestjs/cli':
         specifier: ^10.0.0
         version: 10.2.1
@@ -1069,6 +1072,11 @@ packages:
   /@eslint/js@8.50.0:
     resolution: {integrity: sha512-NCC3zz2+nvYd+Ckfh87rA47zfu2QsQpvc6k1yzTk+b9KzRj0wkGa8LSoGOXN6Zv4lRf/EIoZ80biDh9HOI+RNQ==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
+    dev: true
+
+  /@faker-js/faker@8.3.1:
+    resolution: {integrity: sha512-FdgpFxY6V6rLZE9mmIBb9hM0xpfvQOSNOLnzolzKwsE1DH+gC7lEKV1p1IbR0lAYyvYd5a4u3qWJzowUkw1bIw==}
+    engines: {node: ^14.17.0 || ^16.13.0 || >=18.0.0, npm: '>=6.14.13'}
     dev: true
 
   /@floating-ui/core@1.5.2:

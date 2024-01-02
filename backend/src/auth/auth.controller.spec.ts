@@ -1,7 +1,7 @@
-import { CreateUserDto } from "src/users/dto/create-user.dto";
 import { AuthController } from "./auth.controller";
 import { AuthService } from "./auth.service";
 import { LoginDto } from "./dto/login.dto";
+import { CreateUserDto } from "../users/dto/create-user.dto";
 
 describe("AuthController", () => {
   let controller: AuthController;

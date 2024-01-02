@@ -1,7 +1,7 @@
 import { Controller, Get } from "@nestjs/common";
-import { CurrentUser } from "src/auth/decorators/current-user.decorator";
 import { ApiTags, ApiBearerAuth, ApiOperation } from "@nestjs/swagger";
 import { MatchesService } from "./matches.service";
+import { CurrentUser } from "../auth/decorators/current-user.decorator";
 
 @ApiTags("Match")
 @Controller("matches")
