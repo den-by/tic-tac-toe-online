@@ -55,7 +55,7 @@ export class AuthService {
 
     return {
       loginToken: token,
-      userData: user,
+      userData: _.omit(user, ["password"]),
     };
   }
 
@@ -68,7 +68,7 @@ export class AuthService {
         username: user.username,
       });
 
-      return { loginToken: token, userData: user };
+      return { loginToken: token, userData: _.omit(user, ["password"]) };
     } catch (e) {
       this.logger.error(e);
       if (e instanceof Error && e.message === "User already exists") {
