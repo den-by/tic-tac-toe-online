@@ -99,8 +99,7 @@ describe("Auth Service", () => {
     expect(usersService.create).toHaveBeenCalledWith(createUserDto);
     expect(jwtService.sign).toHaveBeenCalled();
     expect(result).toEqual({
-      loginToken: "token",
-      userData: omit(mockUser, ["password"]),
+      token: "token",
     });
   });
 

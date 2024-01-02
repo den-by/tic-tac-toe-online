@@ -12,8 +12,10 @@ async function createUser(
   const data = await request(app.getHttpServer())
     .post("/auth/register")
     .send({ username, password });
-  const { loginToken } = data.body;
-  return { username, password, loginToken };
+  const {
+    payload: { token },
+  } = data.body;
+  return { username, password, token };
 }
 
 describe("AppController (e2e)", () => {
@@ -37,13 +39,8 @@ describe("AppController (e2e)", () => {
         .send({ username, password })
         .expect(201)
         .expect(({ body }) => {
-          expect(body).toHaveProperty("loginToken");
-          expect(body).toHaveProperty("userData");
-          expect(body.userData).toHaveProperty("id");
-          expect(body.userData).not.toHaveProperty("password");
-          expect(body.userData).toMatchObject({
-            username,
-          });
+          expect(body).toHaveProperty("payload");
+          expect(body.payload).toHaveProperty("token");
         });
     });
     it("should not create a user with the same username", async () => {
@@ -82,10 +79,10 @@ describe("AppController (e2e)", () => {
   });
   describe("/matches/current-user", () => {
     it("should return matches for current user", async () => {
-      const { loginToken } = await createUser(app);
+      const { token } = await createUser(app);
       return request(app.getHttpServer())
         .get("/matches/current-user")
-        .set("Authorization", `Bearer ${loginToken}`)
+        .set("Authorization", `Bearer ${token}`)
         .expect(200)
         .expect(({ body }) => {
           expect(body).toBeInstanceOf(Array);
