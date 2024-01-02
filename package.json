@@ -7,12 +7,14 @@
   "scripts": {
     "all:init": "pnpm i -r && pnpm --parallel run init",
     "all:start:dev": "pnpm --parallel run start:dev",
-    "all:clean": "pnpm --parallel run clean"
+    "all:clean": "pnpm --parallel run clean",
+    "all:lint:all": "pnpm --parallel run lint:all",
+    "prepare": "husky install"
   },
   "author": "Dzianis Buyakou <dzianis.buyakou@gmail.com>",
   "license": "MIT",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
+    "husky": "^8.0.0"
   }
 }
