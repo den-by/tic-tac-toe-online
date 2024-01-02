@@ -15,7 +15,7 @@ import { JwtService } from "@nestjs/jwt";
 import { User } from "@prisma/client";
 import { UsersService } from "../users/users.service";
 import { CreateUserDto } from "../users/dto/create-user.dto";
-import { CreateUserResponseDto } from "../users/dto/CreateUserResponseDto";
+import { CreateUserResponseDto } from "../users/dto/create-user-response.dto";
 
 @Injectable()
 export class AuthService {

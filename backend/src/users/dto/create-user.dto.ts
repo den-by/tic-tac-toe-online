@@ -5,6 +5,7 @@ export class CreateUserDto {
   @ApiProperty({
     type: String,
     description: "Name of the user",
+    example: "exampleUser",
   })
   @IsString()
   username: string;
@@ -12,6 +13,7 @@ export class CreateUserDto {
   @ApiProperty({
     type: String,
     description: "Password of the user",
+    example: "strongPassword",
   })
   @IsString()
   password: string;

@@ -12,9 +12,7 @@ async function createUser(
   const data = await request(app.getHttpServer())
     .post("/auth/register")
     .send({ username, password });
-  const {
-    payload: { token },
-  } = data.body;
+  const { token } = data.body;
   return { username, password, token };
 }
 
@@ -39,8 +37,7 @@ describe("AppController (e2e)", () => {
         .send({ username, password })
         .expect(201)
         .expect(({ body }) => {
-          expect(body).toHaveProperty("payload");
-          expect(body.payload).toHaveProperty("token");
+          expect(body).toHaveProperty("token");
         });
     });
     it("should not create a user with the same username", async () => {

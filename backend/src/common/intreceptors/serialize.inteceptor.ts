@@ -37,9 +37,7 @@ export class SerializeInterceptor implements NestInterceptor {
           response.status(statusCode);
           return { statusCode, message, errors: validationErrors };
         } else {
-          return {
-            payload: instance,
-          };
+          return instance;
         }
       }),
     );
