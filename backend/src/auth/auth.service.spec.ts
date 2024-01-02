@@ -7,6 +7,7 @@ import { LoginDto } from "./dto/login.dto";
 import { CreateUserDto } from "../users/dto/create-user.dto";
 import { UsersService } from "../users/users.service";
 import { omit } from "lodash";
+import { faker } from "@faker-js/faker";
 
 describe("Auth Service", () => {
   let service: AuthService;
@@ -38,13 +39,13 @@ describe("Auth Service", () => {
   it("should login a user with correct credentials", async () => {
     const mockUser = {
       id: 1,
-      username: "test",
-      password: "testPwd",
+      username: faker.internet.userName(),
+      password: faker.internet.password(),
     } as User;
 
     const loginDto: LoginDto = {
-      username: "test",
-      password: "testPwd",
+      username: faker.internet.userName(),
+      password: faker.internet.password(),
     };
 
     usersService.findOneByUsername.mockResolvedValue(mockUser);
@@ -53,8 +54,13 @@ describe("Auth Service", () => {
 
     const result = await service.login(loginDto);
 
-    expect(usersService.findOneByUsername).toHaveBeenCalledWith("test");
-    expect(bcryptCompareSync).toHaveBeenCalledWith("testPwd", "testPwd");
+    expect(usersService.findOneByUsername).toHaveBeenCalledWith(
+      loginDto.username,
+    );
+    expect(bcryptCompareSync).toHaveBeenCalledWith(
+      loginDto.password,
+      mockUser.password,
+    );
     expect(jwtService.sign).toHaveBeenCalled();
     expect(result).toEqual({
       loginToken: "token",
@@ -66,8 +72,8 @@ describe("Auth Service", () => {
     usersService.findOneByUsername.mockResolvedValue(null);
 
     const loginDto: LoginDto = {
-      username: "test",
-      password: "testPwd",
+      username: faker.internet.userName(),
+      password: faker.internet.password(),
     };
 
     await expect(service.login(loginDto)).rejects.toThrow(BadRequestException);
@@ -76,13 +82,13 @@ describe("Auth Service", () => {
   it("should register new user and return auth data for him", async () => {
     const mockUser = {
       id: 1,
-      username: "test",
-      password: "testPwdHash",
+      username: faker.internet.userName(),
+      password: faker.internet.password(),
     } as User;
 
     const createUserDto: CreateUserDto = {
-      username: "test",
-      password: "testPwd",
+      username: faker.internet.userName(),
+      password: faker.internet.password(),
     };
 
     usersService.create.mockResolvedValue(mockUser);
@@ -101,8 +107,8 @@ describe("Auth Service", () => {
   it("should return a user by id excluding his password", async () => {
     const mockUser = {
       id: 1,
-      username: "test",
-      password: "testPwdHash",
+      username: faker.internet.userName(),
+      password: faker.internet.password(),
     } as User;
 
     usersService.getUserOrThrow.mockResolvedValue(mockUser);
@@ -112,7 +118,7 @@ describe("Auth Service", () => {
     expect(usersService.getUserOrThrow).toHaveBeenCalledWith(1);
     expect(result).toEqual({
       id: 1,
-      username: "test",
+      username: mockUser.username,
     });
   });
 });
